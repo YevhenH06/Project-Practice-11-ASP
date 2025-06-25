@@ -1,0 +1,39 @@
+﻿@using AjaxChat.Models
+@model ChatModel
+<div id="RefreshArea">
+    @{
+        Html.RenderPartial("History", Model);
+    }
+</div>
+@Ajax.ActionLink("ActionLink", "Index", new
+{
+    user = "",
+    logOn = "",
+    logOff = "",
+    chatMessage = ""
+},
+new AjaxOptions
+{
+    UpdateTargetId = "RefreshArea",
+    OnSuccess = "ChatOnSuccess",
+    OnFailure = "ChatOnFailure"
+},
+new { @id = "ActionLink", @style = "visibility:hidden;" })
+<div id="inputForm">
+    <table>
+        <tr>
+            <td rowspan="2">
+                <textarea id="txtMessage"
+                          rows="3"></textarea>
+            </td>
+            <td>
+                <button id="btnMessage" value="Надіслати">
+                    Надіслати
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td><button id="btnLogOff" value="Вийти">Вийти</button></td>
+        </tr>
+    </table>
+</div>
